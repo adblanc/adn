@@ -46,4 +46,4 @@ infos();
 
 //testAllShows();
 
-//startCalendar();
+startCalendar();

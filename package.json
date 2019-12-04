@@ -1,6 +1,6 @@
 {
-  "name": "adn",
-  "version": "1.0.0",
+  "name": "@ablanc/adn",
+  "version": "1.1.0",
   "description": "Node.js unofficial api wrapper for adn (animedigitalnetwork)",
   "main": "index.js",
   "scripts": {
