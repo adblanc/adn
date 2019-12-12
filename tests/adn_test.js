@@ -44,6 +44,8 @@ async function infos() {
 
 infos();
 
-//testAllShows();
+catalog();
+
+testAllShows();
 
 startCalendar();
