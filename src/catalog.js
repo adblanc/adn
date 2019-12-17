@@ -46,8 +46,11 @@ async function getCatalog(opt = {}) {
     let result = await fetch(url);
     result = await result.json();
     result.number = result.playlists.length;
-    for (let anime of result.playlists)
+    for (let anime of result.playlists) {
       anime.link = `https://www.animedigitalnetwork.fr${anime.link}`;
+      anime.image = `https:${anime.image}`;
+      ref = "adn";
+    }
     return result;
   } catch (ex) {
     console.error(ex);

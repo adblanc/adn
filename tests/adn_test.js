@@ -1,18 +1,15 @@
 const fs = require("fs").promises;
-
+const moment = require("moment");
 const adn = require("../index");
 
 async function startCalendar() {
-  const days = [
-    "2019-11-08",
-    "2019-11-09",
-    "2019-11-10",
-    "2019-11-11",
-    "2019-11-12",
-    "2019-11-13",
-    "2019-11-14",
-    "2019-11-15"
-  ];
+  const days = [];
+  for (let i = 1; i <= 7; i++)
+    days.push(
+      moment()
+        .isoWeekday(i)
+        .format("YYYY-MM-DD")
+    );
   const result = [];
   for await (let day of days) {
     const res = {
@@ -42,10 +39,10 @@ async function infos() {
   console.log(infos);
 }
 
-infos();
+//infos();
 
-catalog();
+//catalog();
 
-testAllShows();
+//testAllShows();
 
 startCalendar();

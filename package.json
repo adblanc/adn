@@ -1,6 +1,6 @@
 {
   "name": "@ablanc/adn",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Node.js unofficial api wrapper for adn (animedigitalnetwork)",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,8 @@
   "license": "MIT",
   "dependencies": {
     "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "moment": "^2.24.0"
   }
 }
