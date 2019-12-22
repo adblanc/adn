@@ -1,6 +1,7 @@
 const adn = require("../../index");
 
 describe("infos adn", () => {
+  jest.setTimeout(30000);
   it("should return anime infos", async () => {
     const { playlists: catalog } = await adn.getCatalog({ start: 0, end: 20 });
     for (let anime of catalog) {
