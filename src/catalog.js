@@ -49,7 +49,7 @@ async function getCatalog(opt = {}) {
     for (let anime of result.playlists) {
       anime.link = `https://www.animedigitalnetwork.fr${anime.link}`;
       anime.image = `https:${anime.image}`;
-      ref = "adn";
+      anime.ref = "adn";
     }
     return result;
   } catch (ex) {

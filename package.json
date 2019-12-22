@@ -1,10 +1,11 @@
 {
   "name": "@ablanc/adn",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Node.js unofficial api wrapper for adn (animedigitalnetwork)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "adn",
@@ -18,6 +19,7 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "moment": "^2.24.0"
+    "coveralls": "^3.0.9",
+    "jest": "^24.9.0"
   }
 }
