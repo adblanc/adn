@@ -1,4 +1,4 @@
-const adn = require("../../index");
+import * as adn from "../../index";
 
 describe("calendar adn", () => {
   it("should return a valid calendar day", async () => {

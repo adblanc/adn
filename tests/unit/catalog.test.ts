@@ -1,12 +1,11 @@
-const adn = require("../../index");
+import * as adn from "../../index";
 
 describe("catalog adn", () => {
   it("should return a valid catalog", async () => {
     const res = await adn.getCatalog({ start: 0, end: 20 });
     expect(res).toBeTruthy();
-    expect(res.playlists).toBeTruthy();
-    expect(res.number).toBe(20);
-    for (let anime of res.playlists) {
+    expect(res.length).toBe(20);
+    for (let anime of res) {
       expect(anime).toHaveProperty("name");
       expect(anime).toHaveProperty("link");
       expect(anime).toHaveProperty("image");

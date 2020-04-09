@@ -1,11 +1,13 @@
-const adn = require("../../index");
+import * as adn from "../../index";
 
 describe("episodes adn", () => {
   jest.setTimeout(30000);
   it("should return anime episodes", async () => {
-    const { playlists: catalog } = await adn.getCatalog({ start: 0, end: 5 });
+    const catalog = await adn.getCatalog({ start: 0, end: 5 });
     for (let anime of catalog) {
-      const res = await adn.getAllEpisodes(anime.id);
+      const res = await adn.getEpisodes({
+        showId: anime.id,
+      });
       expect(res).toBeTruthy();
       for (let ep of res) {
         expect(Object.keys(ep)).toEqual(
@@ -28,7 +30,6 @@ describe("episodes adn", () => {
             "url",
             "url_path",
             "embedded_url",
-            "serie"
           ])
         );
       }
