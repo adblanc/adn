@@ -1,4 +1,4 @@
-import * as adn from "../../index";
+import * as adn from "../../src/index";
 
 describe("episodes adn", () => {
   jest.setTimeout(30000);

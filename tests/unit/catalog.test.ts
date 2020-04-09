@@ -1,4 +1,4 @@
-import * as adn from "../../index";
+import * as adn from "../../src/index";
 
 describe("catalog adn", () => {
   it("should return a valid catalog", async () => {

@@ -1,4 +1,4 @@
-import * as adn from "../../index";
+import * as adn from "../../src/index";
 
 describe("calendar adn", () => {
   it("should return a valid calendar day", async () => {

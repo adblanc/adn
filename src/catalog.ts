@@ -38,7 +38,7 @@ const fetchCatalog = async ({
   return await result.json();
 };
 
-function checkOptions(opt: Options) {
+function checkOptions(opt?: Options) {
   opt = opt || {};
   opt.start = opt.start || 0;
   opt.end = opt.end || 20;
@@ -54,7 +54,7 @@ function checkOptions(opt: Options) {
 
 export const getCatalog: GetCatalog = async (options) => {
   checkOptions(options);
-  const catalog = await fetchCatalog(options);
+  const catalog = await fetchCatalog(options as Options);
   for (let anime of catalog.playlists) {
     anime.link = `${baseUrl}${anime.link}`;
     anime.image = `https:${anime.image}`;
