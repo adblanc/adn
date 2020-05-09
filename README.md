@@ -9,7 +9,14 @@
 Node.js module wrapper to access adn api (animedigitalnetwork.fr).
 
 ## Installation
-`$ npm install @ablanc/adn --save`
+
+```sh
+# with yarn
+yarn add @ablanc/adn
+
+# or with npm
+npm install @ablanc/adn
+```
 
 ## Examples
 
@@ -18,8 +25,8 @@ const adn = require("@ablanc/adn");
 
 const mondayEpisodes = await adn.getCalendarDay("2019-11-04");
 const catalog = await adn.getCatalog({ start: 0, end: 50 });
-const episodes = await adn.getAllEpisodes(355); // id of the anime
-const infos = await adn.getInfos(335);
+const episodes = await adn.getEpisodes({showId: 355});
+const infos = await adn.getInfos({showId: 355});
 ```
 
 ## Tests
