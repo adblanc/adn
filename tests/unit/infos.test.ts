@@ -6,6 +6,7 @@ describe("infos adn", () => {
     const catalog = await adn.getCatalog({ start: 0, end: 20 });
     for (let anime of catalog) {
       const res = await adn.getInfos({ showId: anime.id });
+      if (!res) return;
       expect(Object.keys(res)).toEqual(
         expect.arrayContaining([
           "episode_count",

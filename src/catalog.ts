@@ -39,21 +39,24 @@ const fetchCatalog = async ({
 };
 
 function checkOptions(opt?: Options) {
+  let options: Options = {};
   opt = opt || {};
-  opt.start = opt.start || 0;
-  opt.end = opt.end || 20;
-  opt.diffusion = opt.diffusion || [];
-  opt.type = opt.type || "";
-  opt.language = opt.language || "";
-  opt.quality = opt.quality || "";
-  opt.age = opt.age || "";
-  opt.genres = opt.genres || [];
-  opt.search = opt.search || "";
-  opt.order = opt.order || "";
+  options.start = opt.start || 0;
+  options.end = opt.end || 20;
+  options.diffusion = opt.diffusion || [];
+  options.type = opt.type || "";
+  options.language = opt.language || "";
+  options.quality = opt.quality || "";
+  options.age = opt.age || "";
+  options.genres = opt.genres || [];
+  options.search = opt.search || "";
+  options.order = opt.order || "";
+
+  return options;
 }
 
 export const getCatalog: GetCatalog = async (options) => {
-  checkOptions(options);
+  options = checkOptions(options);
   const catalog = await fetchCatalog(options as Options);
   for (let anime of catalog.playlists) {
     anime.link = `${baseUrl}${anime.link}`;
