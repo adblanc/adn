@@ -1,0 +1,65 @@
+import { ADN } from "../../src/types";
+
+export const testEpisode = (episode: ADN.Episode) => {
+  expect(Object.keys(episode)).toEqual(
+    expect.arrayContaining([
+      "id",
+      "name",
+      "number",
+      "shortNumber",
+      "season",
+      "reference",
+      "type",
+      "order",
+      "image",
+      "image2x",
+      "summary",
+      "releaseDate",
+      "duration",
+      "url",
+      "urlPath",
+      "embeddedUrl",
+      "languages",
+      "qualities",
+      "rating",
+      "ratingsCount",
+      "commentsCount",
+      "available",
+      "download",
+      "free",
+      "freeWithAds",
+      "show",
+    ])
+  );
+};
+
+export const testShow = (show: ADN.Show) => {
+  expect(Object.keys(show)).toEqual(
+    expect.arrayContaining([
+      "id",
+      "title",
+      "type",
+      "originalTitle",
+      "shortTitle",
+      "reference",
+      "age",
+      "languages",
+      "summary",
+      "image",
+      "image2x",
+      "url",
+      "urlPath",
+      "episodeCount",
+      "genres",
+      "copyright",
+      "rating",
+      "ratingsCount",
+      "commentsCount",
+      "qualities",
+      "simulcast",
+      "free",
+      "download",
+      "nextVideoReleaseDate",
+    ])
+  );
+};

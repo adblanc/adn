@@ -25,6 +25,9 @@ const fetchCatalog = async ({
 
 function checkOptions(opt?: ADN.CatalogOptions) {
   opt = opt || {};
+  if (opt.limit && opt.limit > 100) {
+    throw Error("Please provide a limit <= 100");
+  }
   opt.offset = opt.offset || 0;
   opt.limit = opt.limit || 20;
   opt.diffusion = opt.diffusion || [];

@@ -1,4 +1,5 @@
 import * as adn from "../../src/index";
+import { testShow } from "./utils";
 
 describe("infos adn", () => {
   jest.setTimeout(30000);
@@ -6,34 +7,7 @@ describe("infos adn", () => {
     const catalog = await adn.getCatalog({ offset: 0, limit: 20 });
     for (let anime of catalog) {
       const res = await adn.getInfos(anime.reference);
-      expect(Object.keys(res)).toEqual(
-        expect.arrayContaining([
-          "id",
-          "title",
-          "type",
-          "originalTitle",
-          "shortTitle",
-          "reference",
-          "age",
-          "languages",
-          "summary",
-          "image",
-          "image2x",
-          "url",
-          "urlPath",
-          "episodeCount",
-          "genres",
-          "copyright",
-          "rating",
-          "ratingsCount",
-          "commentsCount",
-          "qualities",
-          "simulcast",
-          "free",
-          "download",
-          "nextVideoReleaseDate",
-        ])
-      );
+      testShow(res);
     }
   });
 });
