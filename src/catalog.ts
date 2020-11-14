@@ -1,29 +1,14 @@
 import fetch from "node-fetch";
-import { Adn } from "./shared/types";
-import { baseUrl } from "./shared/config";
+import { API_URL } from "./shared/config";
+import { ADN } from "./types";
 
-interface Options {
-  start?: number;
-  end?: number;
-  diffusion?: Adn.Diffusion;
-  type?: Adn.Type;
-  language?: Adn.Language;
-  quality?: Adn.Quality;
-  age?: Adn.Age;
-  genres?: Adn.Genres;
-  search?: string;
-  order?: Adn.Order;
-}
-
-interface AdnCatalogResult {
-  playlists: Adn.BasicAnimeInfos[];
-}
-
-type GetCatalog = (options?: Options) => Promise<Adn.BasicAnimeInfos[]>;
+type GetCatalog = (
+  options?: ADN.CatalogOptions
+) => Promise<ADN.Catalog["shows"]>;
 
 const fetchCatalog = async ({
-  start,
-  end,
+  offset,
+  limit,
   diffusion,
   type,
   language,
@@ -32,16 +17,16 @@ const fetchCatalog = async ({
   genres,
   search,
   order,
-}: Options): Promise<AdnCatalogResult> => {
-  const url = `https://www.animedigitalnetwork.fr/index.php?option=com_vodnewcatalog&view=default&format=json&start=${start}&end=${end}&search=${search}&order=${order}&diffusion=${diffusion}&type=${type}&language=${language}&quality=${quality}&age=${age}&genres=${genres}`;
+}: ADN.CatalogOptions): Promise<ADN.Catalog> => {
+  const url = `${API_URL}/show/catalog?offset=${offset}&limit=${limit}&search=${search}&order=${order}&diffusion=${diffusion}&type=${type}&language=${language}&quality=${quality}&age=${age}&genres=${genres}`;
   const result = await fetch(url);
   return await result.json();
 };
 
-function checkOptions(opt?: Options) {
+function checkOptions(opt?: ADN.CatalogOptions) {
   opt = opt || {};
-  opt.start = opt.start || 0;
-  opt.end = opt.end || 20;
+  opt.offset = opt.offset || 0;
+  opt.limit = opt.limit || 20;
   opt.diffusion = opt.diffusion || [];
   opt.type = opt.type || "";
   opt.language = opt.language || "";
@@ -50,16 +35,13 @@ function checkOptions(opt?: Options) {
   opt.genres = opt.genres || [];
   opt.search = opt.search || "";
   opt.order = opt.order || "";
+
+  return opt;
 }
 
 export const getCatalog: GetCatalog = async (options) => {
-  checkOptions(options);
-  const catalog = await fetchCatalog(options as Options);
-  for (let anime of catalog.playlists) {
-    anime.link = `${baseUrl}${anime.link}`;
-    anime.image = `https:${anime.image}`;
-    anime.ref = "adn";
-  }
+  options = checkOptions(options);
+  const catalog = await fetchCatalog(options);
 
-  return catalog.playlists;
+  return catalog.shows;
 };

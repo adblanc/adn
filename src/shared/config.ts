@@ -1,1 +1,1 @@
-export const baseUrl = "https://www.animedigitalnetwork.fr";
+export const API_URL = "https://gw.api.animedigitalnetwork.fr";

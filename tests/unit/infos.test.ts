@@ -3,31 +3,35 @@ import * as adn from "../../src/index";
 describe("infos adn", () => {
   jest.setTimeout(30000);
   it("should return anime infos", async () => {
-    const catalog = await adn.getCatalog({ start: 0, end: 20 });
+    const catalog = await adn.getCatalog({ offset: 0, limit: 20 });
     for (let anime of catalog) {
-      const res = await adn.getInfos({ showId: anime.id });
+      const res = await adn.getInfos(anime.reference);
       expect(Object.keys(res)).toEqual(
         expect.arrayContaining([
-          "episode_count",
-          "rating",
-          "rating_count",
-          "genres",
-          "ref",
           "id",
           "title",
           "type",
-          "free",
-          "summary",
-          "simulcast",
-          "copyright",
+          "originalTitle",
+          "shortTitle",
+          "reference",
           "age",
-          "original_title",
-          "hd",
-          "versions",
-          "image_url",
-          "image2x_url",
+          "languages",
+          "summary",
+          "image",
+          "image2x",
           "url",
-          "url_path",
+          "urlPath",
+          "episodeCount",
+          "genres",
+          "copyright",
+          "rating",
+          "ratingsCount",
+          "commentsCount",
+          "qualities",
+          "simulcast",
+          "free",
+          "download",
+          "nextVideoReleaseDate",
         ])
       );
     }

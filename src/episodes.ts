@@ -1,13 +1,13 @@
 import fetch from "node-fetch";
-import { baseUrl } from "./shared/config";
-import { Adn } from "./shared/types";
+import { API_URL } from "./shared/config";
+import { ADN } from "./types";
 
 interface Options {
   showId: number | string;
   offset?: number;
   limit?: number;
-  order?: "ascending" | "descending";
-  season?: string; // be careful use 01 - 09
+  order?: "asc" | "desc";
+  season?: string;
 }
 
 const requestEpisodes = async ({
@@ -16,26 +16,17 @@ const requestEpisodes = async ({
   limit,
   order,
   season,
-}: Options): Promise<Adn.EpisodeInfosAdn[]> => {
-  const url = `${baseUrl}/index.php?option=com_vodapi&format=json&task=videolist.getJSON&cf_cache=1&show_id=${showId}&offset=${
-    offset || 0
-  }&limit=${limit || -1}&order=${order === "descending" ? -1 : 1}&season=${
-    season || ""
-  }`;
+}: Options): Promise<ADN.Episodes> => {
+  const url = `${API_URL}/video/show/${showId}/?offset=${offset || 0}&limit=${
+    limit || -1
+  }&order=${order || "asc"}&season=${season || ""}`;
+
   const response = await fetch(url);
   return await response.json();
 };
 
-export const getEpisodes = async (
-  options: Options
-): Promise<Adn.FullEpisodeInfosWithoutSerie[]> => {
-  const response = await requestEpisodes(options);
+export const getEpisodes = async (options: Options): Promise<ADN.Episode[]> => {
+  const { videos } = await requestEpisodes(options);
 
-  if (!response.length) return [];
-
-  response.forEach((episode) => {
-    delete episode.serie;
-  });
-
-  return response;
+  return videos;
 };
